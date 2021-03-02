@@ -26,12 +26,7 @@ $eventManager->addEventHandler(
 	
 		$result = $iterator->GetNext();
 	
-		if (!$result)
-		{
-			return true;
-		}
-	
-		if ($result["SHOW_COUNTER"] > 2)
+		if ($result && $result["SHOW_COUNTER"] > 2)
 		{
 			$text = "Товар невозможно деактивировать, у него " . $result["SHOW_COUNTER"] . " просмотров";
 			$APPLICATION->throwException($text);
