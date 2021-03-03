@@ -20,30 +20,21 @@ $eventManager->addEventHandler(
 				),
 				false,
 				array(),
-				array("ID")
+				array(
+					"ID",
+					"PROPERTY_TITLE",
+					"PROPERTY_DESCRIPTION"
+				)
 			);
 			
-			$elem = $iterator->GetNext();
+			$ob = $iterator->GetNext();
 
-			if (!$elem) {
+			if (!$ob["PROPERTY_TITLE_VALUE"] && !$ob["PROPERTY_DESCRIPTION_VALUE"]) {
 				return false;
 			}
 
-			$iterator = CIBlockElement::GetProperty(
-				$IBLOCK_ID,
-				$elem["ID"],
-				array(),
-				array()
-			);
-
-			while($ob = $iterator->GetNext())
-			{
-				$arProp[$ob["NAME"]]=$ob["VALUE"];
-			}
-
-			if (!$arProp) {
-				return false;
-			}
+			$arProp["title"] = $ob["PROPERTY_TITLE_VALUE"];
+			$arProp["description"] = $ob["PROPERTY_DESCRIPTION_VALUE"];
 
 			foreach ($arProp as $key => $value) {
 				$APPLICATION->SetPageProperty($key, $value);
