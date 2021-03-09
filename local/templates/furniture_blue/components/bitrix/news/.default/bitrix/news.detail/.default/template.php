@@ -9,6 +9,12 @@
 	<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
 		<h3><?=$arResult["NAME"]?></h3>
 	<?endif;?>
+	<?if($arParams["COMPLAINTS_AJAX"] == "Y"):?>
+		<a id="complaint-ajax" href="#">Пожаловаться!</a>
+	<?else:?>
+    	<a href="<?$APPLICATION->GetCurDir()?>?type=GET&id=<?=$arResult['ID']?>">Пожаловаться!</a>
+    <?endif;?>
+    <span id="complaint-result"></span>
 	<div class="news-detail">
 	<?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arResult["FIELDS"]["PREVIEW_TEXT"]):?>
 		<p><?=$arResult["FIELDS"]["PREVIEW_TEXT"];unset($arResult["FIELDS"]["PREVIEW_TEXT"]);?></p>
